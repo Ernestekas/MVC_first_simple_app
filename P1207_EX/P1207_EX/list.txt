@@ -1,1 +1,3 @@
-Lėliukas - Bumbukas
+aaa - aaa
+ddd - ddd
+sss - sss

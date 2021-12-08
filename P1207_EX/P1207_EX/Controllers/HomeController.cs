@@ -69,6 +69,12 @@ namespace P1207_EX.Controllers
             return View(_dataService.GetAllTodos(dataFile));
         }
 
+        public IActionResult DeleteListItem(TodoModel model)
+        {
+            _dataService.DeleteFromFile(dataFile, model);
+            return RedirectToAction("ToDoItemsListFromFile");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

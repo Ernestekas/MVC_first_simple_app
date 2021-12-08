@@ -23,7 +23,7 @@ namespace P1207_EX.Services
 
         public void Add(TodoModel todo)
         {
-            if (!string.IsNullOrWhiteSpace(todo.Name) || string.IsNullOrWhiteSpace(todo.Description))
+            if (!string.IsNullOrWhiteSpace(todo.Name) && string.IsNullOrWhiteSpace(todo.Description))
             {
                 Todos.Add(todo);
             } 
@@ -39,14 +39,35 @@ namespace P1207_EX.Services
 
         public void WriteToFile(string filePath, TodoModel model)
         {
-            if(!string.IsNullOrWhiteSpace(model.Name) || !string.IsNullOrWhiteSpace(model.Description))
+            CheckFile(filePath);
+            if(!string.IsNullOrWhiteSpace(model.Name) && !string.IsNullOrWhiteSpace(model.Description))
             {
-                string todoFormated = $"{model.Name} - {model.Description}";
+                List<string> contentToAdd = new List<string>();
                 List<string> newContent = File.ReadLines(filePath).ToList();
-                
-                newContent.Add(todoFormated);
+                string todoFormated = TodoToString(model);
+
+                contentToAdd.Add(todoFormated);
+
+                newContent.AddRange(contentToAdd);
+                newContent.Sort();
                 File.WriteAllLines(filePath, newContent);
             }
+        }
+
+        public void DeleteFromFile(string filePath, TodoModel model)
+        {
+            CheckFile(filePath);
+            List<string> contentFormated = new List<string>();
+            List<TodoModel> content = GetAllTodos(filePath);
+            TodoModel selectedToDelete = content.FirstOrDefault(c => c.Name == model.Name && c.Description == model.Description);
+            content.Remove(selectedToDelete);
+
+            foreach (TodoModel todo in content)
+            {
+                contentFormated.Add(TodoToString(todo));
+            }
+            contentFormated.Sort();
+            File.WriteAllLines(filePath, contentFormated);
         }
 
         public List<TodoModel> GetAllTodos(string filePath)
@@ -67,6 +88,11 @@ namespace P1207_EX.Services
         public string TodoToString(TodoModel todo)
         {
             return $"{todo.Name} - {todo.Description}";
+        }
+        
+        private List<string> GetRawTodos(string path)
+        {
+            return File.ReadAllLines(path).ToList();
         }
     }
 }
