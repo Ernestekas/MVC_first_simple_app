@@ -25,11 +25,9 @@ namespace P1207_EX.Controllers
 
         public IActionResult TodoItemsList()
         {
-            var todos = _dataService.GetAll();
-
             var todosList = new TodoItemsListModel()
             {
-                Todos = todos
+                Todos = _dataService.GetAll()
             };
             return View(todosList);
         }
@@ -46,10 +44,7 @@ namespace P1207_EX.Controllers
         
         public IActionResult SendSubmitData(TodoModel model)
         {
-            if(!string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Description))
-            {
-                _dataService.Add(model);
-            }
+            _dataService.Add(model);
             return RedirectToAction("DisplaySubmitData");
         }
 
@@ -65,24 +60,13 @@ namespace P1207_EX.Controllers
 
         public IActionResult SendSubmitDataToFile(TodoModel model)
         {
-            ReadFilesModel rf = new ReadFilesModel();
-            if (!string.IsNullOrWhiteSpace(model.Name) || !string.IsNullOrWhiteSpace(model.Description))
-            {
-                List<string> content = new List<string>();
-                content.Add(model.ToString());
-                rf.WriteToFile(dataFile, content);
-            }
+            _dataService.WriteToFile(dataFile, model);
             return RedirectToAction("DisplaySubmitDataToFile");
         }
 
         public IActionResult ToDoItemsListFromFile()
         {
-            ReadFilesModel rf = new ReadFilesModel();
-            List<TodoModel> todoModels = new List<TodoModel>();
-
-            rf.CheckFile(dataFile);
-
-            return View(rf.GetAllTodos(dataFile));
+            return View(_dataService.GetAllTodos(dataFile));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
