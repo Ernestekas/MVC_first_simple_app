@@ -1,0 +1,8 @@
+﻿@model TodoItemsListModel
+
+<ul>
+    @foreach(var todo in @Model.Todos)
+    {
+        <li>@todo.Name - @todo.Description</li>
+    }
+</ul>
