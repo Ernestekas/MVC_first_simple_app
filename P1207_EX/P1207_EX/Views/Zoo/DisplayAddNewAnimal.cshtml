@@ -1,0 +1,18 @@
+﻿@model ZooModel
+
+@using (Html.BeginForm("SubmitNewAnimal", "Zoo", FormMethod.Post))
+{
+    @Html.LabelFor(a => a.Name)
+    @Html.TextBoxFor(a => a.Name)
+
+    @Html.LabelFor(a => a.Description)
+    @Html.TextBoxFor(a => a.Description)
+
+    @Html.LabelFor(a => a.Age)
+    @Html.TextBoxFor(a => a.Age, new {@type = "number"})
+    
+    @Html.LabelFor(a => a.Gender)
+    @Html.TextBoxFor(a => a.Gender)
+
+    <input type = "submit" value = "submit" />
+}

@@ -1,0 +1,19 @@
+﻿@model List<ZooModel>
+<h2>All animals in the zoo</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Age</th>
+        <th>Gender</th>
+    </tr>
+    @foreach(var animal in @Model)
+    {
+        <tr>
+            <td>@animal.Name</td>
+            <td>@animal.Description</td>
+            <td>@animal.Age</td>
+            <td>@animal.Gender</td>
+        </tr>
+    }
+</table>

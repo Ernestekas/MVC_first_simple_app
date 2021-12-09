@@ -4,6 +4,5 @@
     @foreach(var todo in @Model)
     {
         <li>@todo.Name - @todo.Description @Html.ActionLink("X", "DeleteListItem", "Home", todo)</li>
-        
     }
 </ul>

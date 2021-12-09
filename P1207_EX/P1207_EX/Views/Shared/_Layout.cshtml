@@ -30,6 +30,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SendSubmitDataToFile">Add new Todo (F)</a>
                         </li>
+                        <div class="dropdown">
+                          <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Zoo(DB)
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="" asp-controller="Zoo" asp-action="Index">List all Animals</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Zoo" asp-action="DisplayAddNewAnimal">Add new animal</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                        </div>
                     </ul>
                 </div>
             </div>
