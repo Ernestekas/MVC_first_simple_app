@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace P1207_EX.Services
 {
@@ -31,12 +32,40 @@ namespace P1207_EX.Services
 
         private void CheckFile(string path)
         {
-            if (!File.Exists(path))
+            if(!File.Exists(path))
             {
-                File.Create(path).Close();
+                if(Path.GetExtension(path) == ".json")
+                {
+                    File.WriteAllText(path, "[]");
+                }
             }
         }
-
+        public List<TodoModel> GetAllJson(string filePath)
+        {
+            CheckFile(filePath);
+            string json = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<TodoModel>>(json);
+        }
+        public void WriteToJson(string filePath, TodoModel model)
+        {
+            CheckFile(filePath);
+            if(!string.IsNullOrWhiteSpace(model.Name) && !string.IsNullOrWhiteSpace(model.Description))
+            {
+                List<TodoModel> content = GetAllJson(filePath);
+                content.Add(model);
+                string json = JsonSerializer.Serialize(content);
+                File.WriteAllText(filePath, json);
+            }
+        }
+        public void DeleteFromJson(string filePath, TodoModel model)
+        {
+            CheckFile(filePath);
+            List<TodoModel> content = GetAllJson(filePath);
+            TodoModel selected = content.FirstOrDefault(t => t.Name == model.Name && t.Description == model.Description);
+            content.Remove(selected);
+            string json = JsonSerializer.Serialize(content);
+            File.WriteAllText(filePath, json);
+        }
         public void WriteToFile(string filePath, TodoModel model)
         {
             CheckFile(filePath);

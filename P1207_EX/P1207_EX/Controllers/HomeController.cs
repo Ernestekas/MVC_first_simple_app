@@ -13,13 +13,12 @@ namespace P1207_EX.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly DataService _dataService;
+        private readonly string _jsonFile = "data.json";
         private readonly string dataFile = "list.txt";
 
-        public HomeController(ILogger<HomeController> logger, DataService dataService)
+        public HomeController(DataService dataService)
         {
-            _logger = logger;
             _dataService = dataService;
         }
 
@@ -34,11 +33,7 @@ namespace P1207_EX.Controllers
 
         public IActionResult DisplaySubmitData()
         {
-            var emptyModel = new TodoModel()
-            {
-                Name = "",
-                Description = ""
-            };
+            var emptyModel = new TodoModel();
             return View(emptyModel);
         }
         
@@ -50,28 +45,24 @@ namespace P1207_EX.Controllers
 
         public IActionResult DisplaySubmitDataToFile()
         {
-            var emptyModel = new TodoModel()
-            {
-                Name = "",
-                Description = ""
-            };
+            var emptyModel = new TodoModel();
             return View(emptyModel);
         }
 
         public IActionResult SendSubmitDataToFile(TodoModel model)
         {
-            _dataService.WriteToFile(dataFile, model);
+            _dataService.WriteToJson(_jsonFile, model);
             return RedirectToAction("DisplaySubmitDataToFile");
         }
 
         public IActionResult ToDoItemsListFromFile()
         {
-            return View(_dataService.GetAllTodos(dataFile));
+            return View(_dataService.GetAllJson(_jsonFile));
         }
 
         public IActionResult DeleteListItem(TodoModel model)
         {
-            _dataService.DeleteFromFile(dataFile, model);
+            _dataService.DeleteFromJson(_jsonFile, model);
             return RedirectToAction("ToDoItemsListFromFile");
         }
 
