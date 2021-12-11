@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using P1207_EX.Models;
 using P1207_EX.Services;
-using System;
-using System.IO;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace P1207_EX.Controllers
 {
@@ -15,7 +9,6 @@ namespace P1207_EX.Controllers
     {
         private readonly DataService _dataService;
         private readonly string _jsonFile = "data.json";
-        private readonly string dataFile = "list.txt";
 
         public HomeController(DataService dataService)
         {

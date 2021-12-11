@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using P1207_EX.Models;
 using P1207_EX.Services;
-using System.Collections.Generic;
 
 namespace P1207_EX.Controllers
 {
@@ -24,13 +23,7 @@ namespace P1207_EX.Controllers
 
         public IActionResult DisplayAddNewAnimal()
         {
-            var empty = new ZooModel()
-            {
-                Name = "",
-                Description = "",
-                Age = 0,
-                Gender = ""
-            };
+            var empty = new ZooModel();
             return View(empty);
         }
 
@@ -40,70 +33,10 @@ namespace P1207_EX.Controllers
             return RedirectToAction("DisplayAddNewAnimal");
         }
 
-        // GET: ZooController1/Details/5
-        public ActionResult Details(int id)
+        public IActionResult DeleteAnimal(ZooModel model)
         {
-            return View();
-        }
-
-        // GET: ZooController1/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ZooController1/Create
-        [HttpPost]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ZooController1/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ZooController1/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ZooController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ZooController1/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _zooService.DeleteAnimal(model);
+            return RedirectToAction("Index");
         }
     }
 }
