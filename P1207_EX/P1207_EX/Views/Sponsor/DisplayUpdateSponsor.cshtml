@@ -1,0 +1,16 @@
+﻿@model SponsorModel
+
+@using (Html.BeginForm("SubmitUpdate", "Sponsor", FormMethod.Post))
+{
+    @Html.TextBoxFor(s => s.Id, new {@readonly = "readonly"})
+
+    @Html.TextBoxFor(s => s.FirstName)
+
+    @Html.TextBoxFor(s => s.Surname)
+
+    @Html.TextBoxFor(s => s.Amount, new {@type = "number"})
+
+    @Html.TextBoxFor(s => s.AnimalId, new {@type = "number"})
+        
+    <input type="submit" value="Update"/>
+}

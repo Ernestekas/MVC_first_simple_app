@@ -28,5 +28,23 @@ namespace P1207_EX.Controllers
             _sponsorService.AddNew(sponsor);
             return RedirectToAction("Sponsors");
         }
+
+        public IActionResult DisplayUpdateSponsor(SponsorModel sponsor)
+        {
+            return View(sponsor);
+        }
+
+        public IActionResult SubmitUpdate(SponsorModel sponsor)
+        {
+            try
+            {
+                _sponsorService.Update(sponsor);
+                return RedirectToAction("Sponsors");
+            }
+            catch
+            {
+                return RedirectToAction("DisplayUpdateSponsor", sponsor);
+            }
+        }
     }
 }

@@ -31,5 +31,13 @@ namespace P1207_EX.Services
                 _connection.Query<SponsorModel>(query);
             }
         }
+
+        public void Update(SponsorModel sponsor)
+        {
+            string query = $"UPDATE dbo.Sponsors " +
+                            $"SET FirstName='{sponsor.FirstName}', Surname='{sponsor.Surname}', Amount={sponsor.Amount}, AnimalId='{sponsor.AnimalId}' " +
+                            $"WHERE Id={sponsor.Id}";
+            _connection.Query<SponsorModel>(query);
+        }
     }
 }
