@@ -2,19 +2,22 @@
 <h2>All animals in the zoo</h2>
 <table class="table table-bordered">
     <tr>
+        <th>Id</th>
         <th>Name</th>
         <th>Description</th>
         <th>Age</th>
         <th>Gender</th>
+        <th>Action</th>
     </tr>
     @foreach(var animal in @Model)
     {
         <tr>
+            <td>@animal.Id</td>
             <td>@animal.Name</td>
             <td>@animal.Description</td>
             <td>@animal.Age</td>
             <td>@animal.Gender</td>
-            <td>@Html.ActionLink("X", "DeleteAnimal", "Zoo", animal)</td>
+            <td>@Html.ActionLink("X", "DeleteAnimal", "Zoo", animal) @Html.ActionLink("Update", "DisplayUpdateAnimal", "Zoo", animal)</td>
         </tr>
     }
 </table>

@@ -9,11 +9,9 @@ namespace P1207_EX.Services
 {
     public class ZooService
     {
-        private readonly ILogger<ZooService> _logger;
         private SqlConnection _connection;
-        public ZooService(ILogger<ZooService> logger, SqlConnection connection)
+        public ZooService(SqlConnection connection)
         {
-            _logger = logger;
             _connection = connection;
         }
         public List<ZooModel> GetAll()
@@ -36,7 +34,14 @@ namespace P1207_EX.Services
 
         public void DeleteAnimal(ZooModel animal)
         {
-            string query = $"DELETE FROM dbo.Animals WHERE Name='{animal.Name}' AND Description='{animal.Description}' AND Age={animal.Age} AND Gender='{animal.Gender}'";
+            string query = $"DELETE FROM dbo.Animals WHERE Id={animal.Id}";
+            _connection.Query<ZooModel>(query);
+        }
+
+        public void UpdateAnimal(ZooModel animal)
+        {
+            string query =
+                $"UPDATE dbo.Animals SET Name='{animal.Name}', Description='{animal.Description}', Age={animal.Age}, Gender='{animal.Gender}' WHERE Id={animal.Id}";
             _connection.Query<ZooModel>(query);
         }
     }

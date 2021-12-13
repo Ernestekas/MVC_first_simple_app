@@ -38,5 +38,16 @@ namespace P1207_EX.Controllers
             _zooService.DeleteAnimal(model);
             return RedirectToAction("Index");
         }
+
+        public IActionResult DisplayUpdateAnimal(ZooModel model)
+        {
+            return View(model);
+        }
+
+        public IActionResult SubmitUpdate(ZooModel model)
+        {
+            _zooService.UpdateAnimal(model);
+            return RedirectToAction("Index");
+        }
     }
 }

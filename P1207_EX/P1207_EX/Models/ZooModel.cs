@@ -4,6 +4,8 @@ namespace P1207_EX.Models
 {
     public class ZooModel
     {
+        [DisplayName("Animal Id: ")]
+        public int Id { get; set; }
         [DisplayName("Animal Name: ")]
         public string Name { get; set; }
         [DisplayName("Description: ")]

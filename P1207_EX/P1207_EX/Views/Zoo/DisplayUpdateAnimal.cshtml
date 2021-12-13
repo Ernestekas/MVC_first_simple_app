@@ -1,0 +1,16 @@
+﻿@model ZooModel
+
+@using (Html.BeginForm("SubmitUpdate", "Zoo", FormMethod.Post))
+{
+    @Html.TextBoxFor(a => a.Id, new {@readonly = "readonly"})
+
+    @Html.TextBoxFor(a => a.Name)
+
+    @Html.TextBoxFor(a => a.Description)
+
+    @Html.TextBoxFor(a => a.Age, new {@type = "number"})
+
+    @Html.TextBoxFor(a => a.Gender)
+        
+    <input type="submit" value="Update"/>
+}
