@@ -26,6 +26,7 @@ namespace P1207_EX
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<SqlConnection>(_ => new SqlConnection(Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddTransient<SponsorService>();
             services.AddSingleton<ZooService>();
             services.AddSingleton<DataService>();
             services.AddControllersWithViews();
@@ -55,7 +56,7 @@ namespace P1207_EX
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=ToDoItemsList}/{id?}");
+                    pattern: "{controller=Zoo}/{action=Index}/{id?}");
             });
         }
     }

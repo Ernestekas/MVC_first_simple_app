@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using P1207_EX.Models;
 using P1207_EX.Services;
 
@@ -8,11 +6,9 @@ namespace P1207_EX.Controllers
 {
     public class ZooController : Controller
     {
-        private readonly ILogger<ZooController> _logger;
         private readonly ZooService _zooService;
-        public ZooController(ILogger<ZooController> logger, ZooService zooService)
+        public ZooController(ZooService zooService)
         {
-            _logger = logger;
             _zooService = zooService;
         }
         // GET: ZooController1

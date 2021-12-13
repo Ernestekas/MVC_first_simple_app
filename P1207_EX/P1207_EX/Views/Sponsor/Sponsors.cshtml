@@ -1,0 +1,27 @@
+﻿@model List<SponsorModel>
+
+<h2>All our sponsors and potential sponsors.</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Amount</th>
+        <th>Sponsored Animal Id</th>
+        <th>Action</th>
+    </tr>
+    @if(@Model != null)
+    {
+        @foreach(var sponsor in @Model)
+        {
+            <tr>
+                <td>@sponsor.Id</td>
+                <td>@sponsor.FirstName</td>
+                <td>@sponsor.Surname</td>
+                <td>@sponsor.Amount</td>
+                <td>@sponsor.AnimalId</td>
+                <td>@Html.ActionLink("X", "DeleteSponsor", "Sponsor", sponsor) @Html.ActionLink("Update", "DisplayUpdateSponsor", "Sponsor", sponsor)</td>
+            </tr>
+        } 
+    }
+</table>
