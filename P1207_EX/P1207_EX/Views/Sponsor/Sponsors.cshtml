@@ -10,18 +10,15 @@
         <th>Sponsored Animal Id</th>
         <th>Action</th>
     </tr>
-    @if(@Model != null)
+    @foreach(var sponsor in @Model)
     {
-        @foreach(var sponsor in @Model)
-        {
-            <tr>
-                <td>@sponsor.Id</td>
-                <td>@sponsor.FirstName</td>
-                <td>@sponsor.Surname</td>
-                <td>@sponsor.Amount</td>
-                <td>@sponsor.AnimalId</td>
-                <td>@Html.ActionLink("X", "DeleteSponsor", "Sponsor", sponsor) @Html.ActionLink("Update", "DisplayUpdateSponsor", "Sponsor", sponsor)</td>
-            </tr>
-        } 
-    }
+        <tr>
+            <td>@sponsor.Id</td>
+            <td>@sponsor.FirstName</td>
+            <td>@sponsor.Surname</td>
+            <td>@sponsor.Amount</td>
+            <td>@sponsor.AnimalId</td>
+            <td>@Html.ActionLink("X", "DeleteSponsor", "Sponsor", sponsor) @Html.ActionLink("Update", "DisplayUpdateSponsor", "Sponsor", sponsor)</td>
+        </tr>
+    } 
 </table>
